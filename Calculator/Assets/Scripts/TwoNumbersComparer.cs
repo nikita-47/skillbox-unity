@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using TMPro;
 
@@ -7,6 +6,7 @@ public class TwoNumbersComparer : MonoBehaviour
     [SerializeField] private TMP_Text result;
     [SerializeField] private TMP_InputField firstOperand;
     [SerializeField] private TMP_InputField secondOperand;
+    [SerializeField] private TMP_InputField resultMax;
     
     private void Start()
     {
@@ -21,12 +21,15 @@ public class TwoNumbersComparer : MonoBehaviour
         if (firstVariable > secondVariable)
         {
             result.text = ">";
+            resultMax.text = $"Наибольшее число {firstVariable}";
         } else if (firstVariable < secondVariable)
         {
             result.text = "<";
+            resultMax.text = $"Наибольшее число {secondVariable}";
         }
         else
         {
+            resultMax.text = "Значения равны";
             result.text = "=";
         }
     }

@@ -25,16 +25,23 @@ public class Calculator : MonoBehaviour
     {
         try
         {
+            float firstNumber = float.Parse(firstOperand.text);
+            float secondNumber = float.Parse(secondOperand.text);
+            
             switch (operation)
             {
                 case Operation.Addition:
-                    return (float.Parse(firstOperand.text) + float.Parse(secondOperand.text)).ToString();
+                    float additionResult = firstNumber + secondNumber;
+                    return additionResult.ToString();
                 case Operation.Division:
-                    return (float.Parse(firstOperand.text) / float.Parse(secondOperand.text)).ToString();
+                    float divisionResult= firstNumber / secondNumber;
+                    return divisionResult.ToString();
                 case Operation.Subtraction:
-                    return (float.Parse(firstOperand.text) - float.Parse(secondOperand.text)).ToString();
+                    float subtractionResult = firstNumber - secondNumber;
+                    return subtractionResult.ToString();
                 case Operation.Multiplication:
-                    return (float.Parse(firstOperand.text) * float.Parse(secondOperand.text)).ToString();
+                    float multiplicationResult = firstNumber * secondNumber;
+                    return multiplicationResult.ToString();
                 default:
                     return "Error";
             }
