@@ -73,9 +73,12 @@ public class GameHandlerScript : MonoBehaviour
         _changesFirst = intsFirstVals.Split(',').ToList().ConvertAll(n => Convert.ToInt32(n.Trim()));
         _changesSecond = intsSecondVals.Split(',').ToList().ConvertAll(n => Convert.ToInt32(n.Trim()));
         _changesThird = intsThirdVals.Split(',').ToList().ConvertAll(n => Convert.ToInt32(n.Trim()));
-        UpdatePins();
+        UpdatePinsAndWinCondition();
     }
 
+    /// <summary>
+    /// Клик на первый инструмент
+    /// </summary>
     public void FirstInstrumentClick()
     {
         if (!_isGameInProgress)
@@ -84,9 +87,12 @@ public class GameHandlerScript : MonoBehaviour
         }
 
         _pinsState.UpdatePins(_changesFirst[0], _changesFirst[1], _changesFirst[2]);
-        UpdatePins();
+        UpdatePinsAndWinCondition();
     }
 
+    /// <summary>
+    /// Клик на второй инструмент
+    /// </summary>
     public void SecondInstrumentClick()
     {
         if (!_isGameInProgress)
@@ -95,9 +101,12 @@ public class GameHandlerScript : MonoBehaviour
         }
 
         _pinsState.UpdatePins(_changesSecond[0], _changesSecond[1], _changesSecond[2]);
-        UpdatePins();
+        UpdatePinsAndWinCondition();
     }
 
+    /// <summary>
+    /// Клик на третий инструмент
+    /// </summary>
     public void ThirdInstrumentClick()
     {
         if (!_isGameInProgress)
@@ -106,7 +115,7 @@ public class GameHandlerScript : MonoBehaviour
         }
 
         _pinsState.UpdatePins(_changesThird[0], _changesThird[1], _changesThird[2]);
-        UpdatePins();
+        UpdatePinsAndWinCondition();
     }
 
     void Update()
@@ -131,6 +140,9 @@ public class GameHandlerScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Остановка игры
+    /// </summary>
     private void StopGame()
     {
         winPanel.SetActive(true);
@@ -139,16 +151,22 @@ public class GameHandlerScript : MonoBehaviour
         timerText.text = "00:00";
     }
 
+    /// <summary>
+    /// Сброс игры для init значений
+    /// </summary>
     public void RestartGame()
     {
         winPanel.SetActive(false);
         _isUserWin = false;
         _pinsState = _initialPinsState;
-        UpdatePins();
+        UpdatePinsAndWinCondition();
         _isGameInProgress = true;
         _timePassed = 0;
     }
 
+    /// <summary>
+    /// Первый старт игры. Сброс до init значений
+    /// </summary>
     public void StartGame()
     {
         startButton.gameObject.SetActive(false);
@@ -156,7 +174,10 @@ public class GameHandlerScript : MonoBehaviour
         RestartGame();
     }
 
-    private void UpdatePins()
+    /// <summary>
+    /// Обновить значения пинов и проверить условия выигрыша
+    /// </summary>
+    private void UpdatePinsAndWinCondition()
     {
         firstPin.text = _pinsState.First.ToString();
         secondPin.text = _pinsState.Second.ToString();

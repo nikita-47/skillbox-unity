@@ -18,7 +18,7 @@ public struct PinsState
         get => _first;
         private set {
             _first = value;
-            if (_first is > 9 or < 1)
+            if (_first is > 10 or < 0)
             {
                 throw new Exception();
             }
@@ -30,7 +30,7 @@ public struct PinsState
         get => _second;
         private set {
             _second = value;
-            if (_second is > 9 or < 1)
+            if (_second is > 10 or < 0)
             {
                 throw new Exception();
             }
@@ -42,13 +42,17 @@ public struct PinsState
         get => _third;
         private set {
             _third = value;
-            if (_third is > 9 or < 1)
+            if (_third is > 10 or < 0)
             {
                 throw new Exception();
             }
         }
     }
 
+    /// <summary>
+    /// Попытка обновить значения пинов
+    /// Необходимо передавать дельту-изменений
+    /// </summary>
     public void UpdatePins(int first, int second, int third)
     {
         PinsState prevState = this;
